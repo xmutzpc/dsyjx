@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>东山渔见鲜 - 福建漳州东山渔见鲜水产有限公司</title>
+  <meta name="description" content="福建漳州东山渔见鲜水产有限公司，2016年创立于北纬23°黄金海岸东山岛，自有小船现钓、上岸活冻、精深加工，以公司+小船+渔户模式助力乡村振兴，活冻海鲜顺丰冷链到家。">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <!-- 首页品牌化：深海蓝 × 鎏金（与 Logo、公司简介视觉一致，仅作用于本页） -->
+  <style>
+    :root {
+      --c-primary: #0B3A5E;
+      --c-primary-dark: #082B47;
+      --c-primary-light: #EAF1F7;
+      --c-gold: #C9A254;
+      --c-gold-light: #F5EBD6;
+    }
+    /* 品牌金下划线 */
+    .section-head h2 { margin-bottom: 4px; }
+    .section-head h2::after {
+      content: ""; display: block;
+      width: 46px; height: 3px;
+      background: var(--c-gold);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+    /* 下拉与高亮去红 */
+    .dropdown a:hover { background: var(--c-primary-light); }
+    .btn-white { color: var(--c-primary); }
+
+    /* ---- Banner 底图（视频实拍背景，仅active可见并播放） ---- */
+    .banner .slide .bg.video-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0B3A5E 0%, #12517F 60%, #0C4470 100%);
+    }
+    .banner .slide video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      visibility: hidden;
+    }
+    .banner .slide.active video { visibility: visible; }
+    .banner .slide .bg.video-bg::after {
+      content: ""; position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+      background: linear-gradient(180deg, rgba(8,43,71,.10) 0%, rgba(8,43,71,.38) 55%, rgba(6,30,50,.68) 100%);
+    }
+    .banner .slide .cap .pill {
+      display: inline-block;
+      border: 1px solid rgba(201,162,84,.85);
+      color: #E9CE96;
+      font-size: 14px; letter-spacing: 4px;
+      padding: 5px 18px 5px 22px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      background: rgba(11,58,94,.35);
+    }
+
+    /* ---- 关于我们：品牌信息卡 ---- */
+    .about-panel {
+      position: relative;
+      background: linear-gradient(160deg, #0B3A5E 0%, #12517F 100%);
+      border-radius: 12px;
+      color: #fff;
+      padding: 32px 30px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(11,58,94,.28);
+      border: 1px solid rgba(201,162,84,.4);
+    }
+    .about-panel::before {
+      content: "鮮";
+      position: absolute; right: -14px; bottom: -46px;
+      font-size: 190px; font-weight: 800; line-height: 1;
+      color: rgba(255,255,255,.05);
+      font-family: "SimSun", serif;
+    }
+    .about-panel .ap-slogan {
+      font-size: 26px; font-weight: 800; letter-spacing: 2px;
+      color: #fff; margin-bottom: 4px;
+    }
+    .about-panel .ap-slogan b { color: #E9CE96; font-weight: 800; }
+    .about-panel .ap-sub {
+      font-size: 12px; color: rgba(255,255,255,.65);
+      letter-spacing: 3px; margin-bottom: 22px; text-transform: uppercase;
+    }
+    .about-panel .ap-row {
+      display: flex; align-items: baseline; gap: 10px;
+      padding: 11px 0; border-top: 1px solid rgba(255,255,255,.12);
+      font-size: 14px; color: rgba(255,255,255,.92);
+    }
+    .about-panel .ap-row .k {
+      flex: none; width: 74px; color: #E9CE96; font-size: 13px;
+    }
+    .about-panel .ap-row .v { line-height: 1.6; }
+    .about-panel .ap-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .about-panel .ap-tags span {
+      font-size: 12px; color: #F5EBD6;
+      border: 1px solid rgba(201,162,84,.7);
+      padding: 3px 12px; border-radius: 999px;
+    }
+
+    /* ---- 品牌实力（核心数据） ---- */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .stat-item {
+      background: #fff;
+      border: 1px solid var(--c-line);
+      border-top: 3px solid var(--c-gold);
+      border-radius: var(--radius-lg);
+      padding: 30px 18px 24px;
+      text-align: center;
+      transition: all .2s;
+    }
+    .stat-item:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .stat-num {
+      font-size: 46px; font-weight: 800; line-height: 1.05;
+      color: var(--c-primary);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    .stat-num small { font-size: 22px; font-weight: 700; color: var(--c-gold); margin-left: 2px; }
+    .stat-label { margin-top: 10px; color: var(--c-text-2); font-size: 13px; }
+    .stat-desc { margin-top: 4px; color: var(--c-text-3); font-size: 12px; }
+
+    /* ---- 业务版图（五步鲜活链路） ---- */
+    .chain-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 16px; align-items: stretch;
+    }
+    .chain-step {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--c-line);
+      border-radius: var(--radius-lg);
+      padding: 26px 18px 22px;
+      text-align: center;
+      transition: all .2s;
+    }
+    .chain-step:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--c-gold); }
+    .chain-step:not(:last-child)::after {
+      content: "→";
+      position: absolute; right: -17px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--c-gold); font-size: 22px; font-weight: 800;
+      z-index: 3; text-shadow: 0 0 0 #fff, 0 0 6px rgba(255,255,255,.9);
+    }
+    .chain-step .st-no {
+      display: grid; place-items: center;
+      width: 42px; height: 42px; margin: 0 auto 12px;
+      border-radius: 50%;
+      background: var(--c-primary); color: #fff;
+      font-size: 15px; font-weight: 800;
+      box-shadow: 0 0 0 4px var(--c-primary-light);
+    }
+    .chain-step h4 { font-size: 16px; color: var(--c-primary); margin-bottom: 6px; }
+    .chain-step p { margin: 0; color: var(--c-text-3); font-size: 12.5px; line-height: 1.6; }
+
+    /* ---- CTA ---- */
+    .cta-band {
+      background:
+        radial-gradient(700px 320px at 88% 10%, rgba(201,162,84,.22), transparent 60%),
+        linear-gradient(120deg, #082B47 0%, #0B3A5E 60%, #12517F 100%);
+    }
+    .cta-band h2 { color: #fff; }
+    .btn-gold {
+      background: var(--c-gold); color: #0B3A5E;
+    }
+    .btn-gold:hover { background: #DCB96C; }
+    .btn-outline-light {
+      background: transparent; color: #fff;
+      border: 1px solid rgba(255,255,255,.65);
+    }
+    .btn-outline-light:hover { background: rgba(255,255,255,.12); }
+
+    @media (max-width: 1024px) {
+      .chain-grid { grid-template-columns: repeat(3, 1fr); }
+      .chain-step::after { display: none; }
+      .chain-step:last-child { grid-column: auto; }
+    }
+    @media (max-width: 920px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .chain-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .about-panel { padding: 26px 20px; }
+      .about-panel .ap-slogan { font-size: 21px; }
+    }
+
+    /* ---- Banner 加高：适配 16:9 实拍视频沉浸播放 ---- */
+    /* 桌面/平板横屏：高度跟随视口(72vh)，让视频画面更完整呈现 */
+    @media (min-width: 921px) {
+      .banner { height: clamp(600px, 72vh, 860px); }
+    }
+    /* 手机竖屏：视频cover全宽居中裁切，加高提升观感 */
+    @media (max-width: 920px) {
+      .banner { height: 480px; }
+    }
+  </style>
+</head>
+<body>
+<div class="site-root">
+  <header class="site-header" id="site-header"></header>
+  <main class="site-main">
+
+    <!-- Banner -->
+    <section class="banner">
+      <div class="slide active">
+        <div class="bg video-bg">
+          <video autoplay muted loop playsinline preload="auto">
+            <source src="assets/videos/video-1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="cap">
+          <span class="pill">源头实拍 · 眼见为鲜</span>
+          <h1>真海钓 · 看得见</h1>
+          <p>自有小船出海作业现场直拍，鲜味从源头看得见</p>
+          <a href="business.html" class="btn btn-white">了解产品</a>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="bg video-bg">
+          <video autoplay muted loop playsinline preload="auto">
+            <source src="assets/videos/video-2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="cap">
+          <span class="pill">乘风出海 · 现钓现获</span>
+          <h1>小船现钓 · 活冻锁鲜</h1>
+          <p>北纬23°东山岛，从浪尖到舌尖的鲜活旅程</p>
+          <a href="contact.html" class="btn btn-white">立即尝鲜</a>
+        </div>
+      </div>
+      <div class="dots"><i class="on"></i><i></i></div>
+    </section>
+
+    <!-- 01 关于我们 -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="sub">ABOUT US</div>
+          <h2>关于东山渔见鲜</h2>
+        </div>
+        <div class="about-intro">
+          <div class="prose">
+            <h2>扎根北纬23°黄金海岸 · 自有小船现钓</h2>
+            <p>东山渔见鲜成立于2016年，坐落于北纬23°黄金海岸的福建东山岛，是一家集自有船员、小船出海手钓、精深加工、销售贸易于一体的水产品企业，专注野生海钓海鲜。</p>
+            <p>公司自建200余平方米冻库与400余平方米加工厂，以「公司+小船+渔户」的联农带农模式链接渔港、渔户与餐桌，带动渔村就业增收，助力乡村振兴。</p>
+            <p>「东山渔见鲜」为自有品牌，坚持小船现钓、上岸活冻、锁住新鲜，依托顺丰冷链，让全国各地的家庭都能品尝到北纬23°的东山岛鲜味。</p>
+            <a href="about.html" class="btn btn-primary" style="margin-top:10px;">了解更多 ›</a>
+          </div>
+          <div class="about-panel">
+            <div class="ap-slogan">小船现钓 <b>·</b> 活冻锁鲜</div>
+            <div class="ap-sub">DONGSHAN ISLAND · WILD-CAUGHT SEAFOOD</div>
+            <div class="ap-row"><span class="k">品牌创立</span><span class="v">2016 年 · 自有品牌</span></div>
+            <div class="ap-row"><span class="k">黄金渔场</span><span class="v">北纬23° 福建东山岛</span></div>
+            <div class="ap-row"><span class="k">自有设施</span><span class="v">200+㎡ 冻库 · 400+㎡ 精深加工厂</span></div>
+            <div class="ap-row"><span class="k">经营模式</span><span class="v">公司 + 小船 + 渔户</span></div>
+            <div class="ap-row"><span class="k">业务版图</span><span class="v">出海手钓 · 精深加工 · 销售贸易</span></div>
+            <div class="ap-tags"><span>自有小船海钓</span><span>上岸活冻</span><span>品控溯源</span><span>顺丰冷链到家</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 品牌实力 -->
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <div class="sub">AT A GLANCE</div>
+          <h2>品牌实力</h2>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-num">2016<small>年</small></div>
+            <div class="stat-label">创立自有品牌</div>
+            <div class="stat-desc">扎根东山渔港十年口碑</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">23<small>°N</small></div>
+            <div class="stat-label">北纬23° 黄金渔场</div>
+            <div class="stat-desc">近海小船现钓天然渔获</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">200<small>+㎡</small></div>
+            <div class="stat-label">自有冻库</div>
+            <div class="stat-desc">上岸活冻 · 全程低温锁鲜</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">400<small>+㎡</small></div>
+            <div class="stat-label">精深加工厂</div>
+            <div class="stat-desc">分拣加工 · 标准品控出库</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 业务版图 -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="sub">BUSINESS CHAIN</div>
+          <h2>从大海到餐桌 · 五步鲜活链路</h2>
+        </div>
+        <div class="chain-grid">
+          <div class="chain-step">
+            <div class="st-no">01</div>
+            <h4>出海手钓</h4>
+            <p>自有船员乘小船近海现钓，野生渔获鲜活上船</p>
+          </div>
+          <div class="chain-step">
+            <div class="st-no">02</div>
+            <h4>上岸活冻</h4>
+            <p>抵港即分拣活冻，锁住离水后的第一口鲜甜</p>
+          </div>
+          <div class="chain-step">
+            <div class="st-no">03</div>
+            <h4>精深加工</h4>
+            <p>400+㎡ 标准车间，分拣、去脏、包装规范作业</p>
+          </div>
+          <div class="chain-step">
+            <div class="st-no">04</div>
+            <h4>品控溯源</h4>
+            <p>全程品控、批次可溯，让每一单都安全放心</p>
+          </div>
+          <div class="chain-step">
+            <div class="st-no">05</div>
+            <h4>顺丰到家</h4>
+            <p>真空锁鲜包装，顺丰冷链直送全国餐桌</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 核心优势 -->
+    <section class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <div class="sub">CORE ADVANTAGE</div>
+          <h2>四大核心优势</h2>
+        </div>
+        <div class="culture-grid">
+          <div class="culture-item">
+            <div class="ci-ic">钓</div>
+            <h4>自有小船现钓</h4>
+            <p>自有船员与渔户协作，源头把控品质，野生鱼获小船现钓</p>
+          </div>
+          <div class="culture-item">
+            <div class="ci-ic">冻</div>
+            <h4>上岸活冻锁鲜</h4>
+            <p>渔获上岸即活冻处理，最大限度锁住新鲜本味</p>
+          </div>
+          <div class="culture-item">
+            <div class="ci-ic">控</div>
+            <h4>全链路品控</h4>
+            <p>从分拣、加工到冻库出库全程品控，批次可溯源</p>
+          </div>
+          <div class="culture-item">
+            <div class="ci-ic">达</div>
+            <h4>顺丰冷链到家</h4>
+            <p>专业锁鲜包装，顺丰冷链直送，鲜味抵达千家万户</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-band">
+      <div class="container" style="text-align:center;color:#fff;">
+        <h2 style="font-size:28px;">尝一口北纬23°的鲜 · 一单也能顺丰直达</h2>
+        <p style="opacity:.92;margin:10px 0 24px;">批发 / 零售 / 电商 / 餐饮供货，欢迎来电咨询</p>
+        <a href="contact.html" class="btn btn-white" style="margin-right:10px;">立即联系 ›</a>
+        <a href="tel:18150133337" class="btn btn-gold">📞 18150133337</a>
+      </div>
+    </section>
+
+  </main>
+  <footer class="site-footer" id="site-footer"></footer>
+</div>
+<script src="assets/js/site.js?v=20260905d"></script>
+</body>
+</html>

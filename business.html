@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>产品中心 - 福建漳州东山渔见鲜水产有限公司</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    /* 产品中心头图 Banner */
+    .page-hero .ph-banner { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* 产品详情图：淘宝式纵向平铺（间距 16px / 圆角 8px，保持原始比例不裁切） */
+    .gallery { margin-top: 22px; }
+    .gallery .g-track { display: flex; flex-direction: column; gap: 16px; }
+    .gallery .g-track img { width: 100%; height: auto; display: block; border-radius: 8px; background: #f4f6f8; cursor: zoom-in; }
+    .gallery .g-empty { padding: 60px 20px; text-align: center; color: var(--c-text-2); font-size: 14px; background: #f4f6f8; border-radius: 8px; }
+
+    /* 图片全屏放大 */
+    .img-lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.86); display: none; align-items: center; justify-content: center; z-index: 9999; cursor: zoom-out; padding: 40px; }
+    .img-lightbox.on { display: flex; }
+    .img-lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<div class="site-root">
+  <header class="site-header" id="site-header"></header>
+  <main class="site-main">
+
+    <section class="page-hero">
+      <img class="ph-banner" src="assets/images/product-center-banner.jpg" alt="东山岛渔港新鲜海产">
+      <div class="cap"><h1>产品中心</h1><p>PRODUCT CENTER</p></div>
+    </section>
+
+    
+
+    <section class="sub-page-section">
+      <div class="container">
+        <div class="biz-layout">
+
+          <aside class="biz-sidebar">
+            <div class="biz-sidebar-head">
+              <h3>产品中心</h3>
+              <span>PRODUCT CENTER</span>
+            </div>
+            <div class="biz-menu">
+              <!-- 左侧菜单由 assets/js/products.js 清单自动生成 -->
+            </div>
+          </aside>
+
+          <div class="biz-main">
+            <!-- 产品详情区由 assets/js/products.js 清单自动生成 -->
+            </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer class="site-footer" id="site-footer"></footer>
+</div>
+<script src="assets/js/products.js?v=20260905114123"></script>
+<script src="assets/js/site.js?v=20260905d"></script>
+</body>
+</html>

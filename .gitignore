@@ -19,3 +19,6 @@ assets/doc_images/ole_bmp_1.bmp
 # ===== 本地环境变量/密钥（如有） =====
 .env
 .env.local
+
+# ===== AI 生成源图（仅保留导出 jpg，源 png 不入库） =====
+assets/images/*2026-09-05T*.png

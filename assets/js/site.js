@@ -262,6 +262,76 @@
     main.innerHTML = mainHtml;
   }
 
+  /* 新闻中心：从 assets/news/news-index.json 读列表，从 assets/news/{id}.json 读详情；编号大在上（新） */
+  function renderNews() {
+    var root = document.getElementById('news-root');
+    if (!root) return;
+
+    function esc(v) {
+      return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    /* 破坏浏览器缓存：新闻数据文件每次都重新拉取，避免加完新闻页面不刷新 */
+    function nbust(u) {
+      return u + (u.indexOf('?') >= 0 ? '&' : '?') + '_=' + Date.now();
+    }
+
+    /* 正文优先读 JSON 内联 content；没有则 fetch 同名 .html 文件（可直接粘贴浏览器 copy outerHTML） */
+    function getContent(d, cb) {
+      if (d.content && d.content.trim()) { cb(d.content); return; }
+      fetch(nbust('assets/news/' + (d.id || '') + '.html'))
+        .then(function (r) { return r.ok ? r.text() : ''; })
+        .then(function (html) { cb(html || ''); })
+        .catch(function () { cb(''); });
+    }
+
+    function showDetail(id) {
+      fetch(nbust('assets/news/' + id + '.json'))
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (!d) { location.hash = ''; return; }
+          var cover = d.cover ? '<img class="news-detail-cover" src="' + d.cover + '" alt="">' : '';
+          getContent(d, function (html) {
+            root.innerHTML =
+              '<a class="news-back" href="javascript:void(0)">← 返回新闻列表</a>'
+              + cover
+              + '<h1 class="news-detail-title">' + esc(d.title) + '</h1>'
+              + '<div class="news-detail-date">' + esc(d.date) + '</div>'
+              + '<div class="news-detail-content">' + html + '</div>';
+            var back = root.querySelector('.news-back');
+            if (back) back.addEventListener('click', function () { location.hash = ''; });
+            window.scrollTo(0, 0);
+          });
+        })
+        .catch(function () { location.hash = ''; });
+    }
+
+    var m = location.hash.match(/^#(\d{2,})$/);
+    if (m) { showDetail(m[1]); return; }
+
+    fetch(nbust('assets/news/news-index.json'))
+      .then(function (r) { return r.json(); })
+      .then(function (list) {
+        if (!list || !list.length) { root.innerHTML = '<div class="news-empty">暂无新闻</div>'; return; }
+        list.sort(function (a, b) { return Number(b.id) - Number(a.id); });
+        var cards = list.map(function (n) {
+          var cover = n.cover ? '<div class="news-card-cover" style="background-image:url(' + n.cover + ')"></div>' : '';
+          return '<a class="news-card" href="#' + esc(n.id) + '">'
+            + cover
+            + '<div class="news-card-body">'
+            + '<span class="news-card-date">' + esc(n.date) + '</span>'
+            + '<h3 class="news-card-title">' + esc(n.title) + '</h3>'
+            + '<p class="news-card-summary">' + esc(n.summary || '') + '</p>'
+            + '</div></a>';
+        }).join('');
+        root.innerHTML = '<div class="news-list">' + cards + '</div>';
+      })
+      .catch(function () {
+        root.innerHTML = '<div class="news-empty">新闻加载失败，请通过 http 服务访问（勿用 file:// 直接打开）</div>';
+      });
+  }
+
   /* 产品详情图：淘宝式纵向平铺，顺序读取 data-folder 内 01/02/03... 图片 */
   function initProductGallery() {
     var galleries = document.querySelectorAll('.gallery');
@@ -334,6 +404,8 @@
     initSubTabs();
     renderProducts();
     initBizMenu();
+    renderNews();
+    window.addEventListener('hashchange', renderNews);
     initContactForm();
     initCardSearch();
     initProductGallery();

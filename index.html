@@ -99,7 +99,7 @@
     }
 
     /* ---- 品牌实力（核心数据） ---- */
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
     .stat-item {
       background: #fff;
       border: 1px solid var(--c-line);
@@ -193,6 +193,118 @@
     @media (max-width: 920px) {
       .banner { height: 480px; }
     }
+
+    /* ---- 产品中心精选（首页：左侧目录 + 右侧8图，预览版） ---- */
+    .pp-layout { display: flex; gap: 28px; align-items: flex-start; margin-top: 18px; }
+    .pp-sidebar { width: 220px; flex-shrink: 0; }
+    .pp-sb-head {
+      background: #0B3A5E; color: #fff; text-align: center;
+      padding: 20px 12px 16px; border-radius: 10px 10px 0 0;
+    }
+    .pp-sb-head h3 { font-size: 22px; margin: 0 0 4px; letter-spacing: 1px; }
+    .pp-sb-head span { font-size: 11px; opacity:.78; letter-spacing: 1.5px; }
+    .pp-cat-list {
+      background: #fff; border: 1px solid rgba(11,58,94,.08);
+      border-top: none; border-radius: 0 0 10px 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(11,58,94,.06);
+    }
+    .pp-cat-item {
+      display: block; padding: 13px 16px; cursor: pointer;
+      color: #333; font-size: 15px; font-weight: 500;
+      border-bottom: 1px solid rgba(11,58,94,.06);
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background .15s ease, color .15s ease;
+    }
+    .pp-cat-item:last-child { border-bottom: none; }
+    .pp-cat-item:hover { background: #EAF1F7; color: #0B3A5E; }
+    .pp-cat-item.active { background: #EAF1F7; color: #0B3A5E; font-weight: 600; }
+    .pp-cat-arrow { font-size: 10px; transition: transform .25s ease; color: #999; }
+    .pp-cat-item.open .pp-cat-arrow { transform: rotate(180deg); color: #0B3A5E; }
+    .pp-sub-list {
+      max-height: 0; overflow: hidden; transition: max-height .35s ease;
+      background: #fafafa; padding: 0 12px;
+    }
+    .pp-sub-list.show { max-height: 600px; padding: 8px 12px 12px; }
+    .pp-sub-link {
+      display: block; padding: 7px 10px; font-size: 13.5px; color: #555;
+      text-decoration: none; border-radius: 6px; transition: all .12s ease;
+    }
+    .pp-sub-link:hover { background: #fff; color: #0B3A5E; }
+
+    /* 右侧产品网格 */
+    .pp-main { flex: 1; min-width: 0; }
+    .pp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .pp-card {
+      display: block; background: #fff; border-radius: 12px; overflow: hidden;
+      text-decoration: none; color: #0B3A5E;
+      border: 1px solid rgba(11,58,94,.07);
+      box-shadow: 0 4px 14px rgba(11,58,94,.06);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .pp-card:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(11,58,94,.16); }
+    .pp-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+    .pp-name {
+      display: block; text-align: center; padding: 10px 6px;
+      font-size: 14px; font-weight: 600;
+      border-top: 1px solid rgba(11,58,94,.05);
+    }
+    .pp-more { text-align: center; margin-top: 20px; }
+    .pp-more a { color: #C9A254; font-weight: 600; text-decoration: none; font-size: 15px; }
+    .pp-more a:hover { text-decoration: underline; }
+    @media (max-width: 900px) {
+      .pp-layout { flex-direction: column; }
+      .pp-sidebar { width: 100%; }
+      .pp-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 600px) { .pp-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+
+    /* ---- 新闻中心（首页） ---- */
+    .news-home { background: #f6f7f9; }
+    .news-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 26px; flex-wrap: wrap; gap: 14px;
+    }
+    .news-head-left .sub { color: #9aa5b1; font-size: 13px; letter-spacing: 2px; font-weight: 600; }
+    .news-head-left h2 { color: #0B3A5E; font-size: 30px; margin: 6px 0 0; font-weight: 700; letter-spacing: 1px; }
+    .news-more {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 22px; background: #C9A254; color: #0B3A5E;
+      border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 600;
+      transition: background .15s, transform .15s;
+    }
+    .news-more:hover { background: #DCB96C; transform: translateY(-1px); }
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .news-card {
+      display: flex; flex-direction: column; background: #fff;
+      border-radius: 14px; padding: 26px 24px 24px;
+      box-shadow: 0 6px 22px rgba(0,0,0,.05);
+      text-decoration: none; color: inherit; min-height: 220px;
+      transition: transform .18s, box-shadow .18s;
+    }
+    .news-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,.09); }
+    .news-card-title {
+      font-size: 17px; font-weight: 700; color: #2b2b2b; line-height: 1.4;
+      margin: 0 0 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .news-card-dash { display: block; width: 26px; height: 3px; background: #2e8b57; border-radius: 2px; margin-bottom: 12px; }
+    .news-card-summary {
+      font-size: 13px; color: #666; line-height: 1.7; flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .news-card-more {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-top: 18px; align-self: flex-start;
+      padding: 8px 18px; background: #C9A254; color: #0B3A5E;
+      border-radius: 999px; font-size: 13px; font-weight: 600;
+      transition: background .15s;
+    }
+    .news-card:hover .news-card-more { background: #DCB96C; }
+    .news-empty { color: #999; text-align: center; padding: 30px 0; font-size: 14px; }
+    @media (max-width: 900px) {
+      .news-grid { grid-template-columns: 1fr; }
+      .news-head { align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
@@ -241,15 +353,15 @@
         <div class="about-intro">
           <div class="prose">
             <h2>扎根北纬23°黄金海岸 · 自有小船现钓</h2>
-            <p>东山渔见鲜成立于2016年，坐落于北纬23°黄金海岸的福建东山岛，是一家集自有船员、小船出海手钓、精深加工、销售贸易于一体的水产品企业，专注野生海钓海鲜。</p>
-            <p>公司自建200余平方米冻库与400余平方米加工厂，以「公司+小船+渔户」的联农带农模式链接渔港、渔户与餐桌，带动渔村就业增收，助力乡村振兴。</p>
-            <p>「东山渔见鲜」为自有品牌，坚持小船现钓、上岸活冻、锁住新鲜，依托顺丰冷链，让全国各地的家庭都能品尝到北纬23°的东山岛鲜味。</p>
+            <p>东山渔见鲜创立于 2016 年，扎根于北纬 23° 黄金海岸线上的福建东山岛。品牌创始人是地地道道的渔民世家，世代与海为伴、以船为家，对这片海域的潮汐、鱼汛与渔获熟稔于心。如今，东山渔见鲜已成长为一家集自有船员、小船近海手钓、精深加工、销售贸易于一体的水产品企业，始终专注野生海钓海鲜，把渔民世家的匠心延续进每一道工序。</p>
+            <p>公司自建 200 余平方米低温冻库与 400 余平方米标准化加工厂，从捕捞、锁鲜到加工、发货形成完整闭环。我们推行「公司 + 小船 + 渔户」的联农带农模式，把分散在渔港的小船与渔户组织起来，统一标准、统一品控、统一渠道，让渔港、渔户与餐桌紧密相连。这一模式既带动渔村就业与渔民增收，也成为海岛乡村振兴的鲜活注脚。</p>
+            <p>「东山渔见鲜」是我们要用心守护的自有品牌。我们坚持小船现钓、上岸即活冻，把大海的鲜味在最短时间里牢牢锁住；依托顺丰冷链直发，从浪尖到舌尖全程不断链。无论你身在祖国的哪个角落，都能在一餐一饭之间，尝到北纬 23° 东山岛那份带着海风的、真实的鲜。</p>
             <a href="about.html" class="btn btn-primary" style="margin-top:10px;">了解更多 ›</a>
           </div>
           <div class="about-panel">
             <div class="ap-slogan">小船现钓 <b>·</b> 活冻锁鲜</div>
             <div class="ap-sub">DONGSHAN ISLAND · WILD-CAUGHT SEAFOOD</div>
-            <div class="ap-row"><span class="k">品牌创立</span><span class="v">2016 年 · 自有品牌</span></div>
+            <div class="ap-row"><span class="k">品牌创立</span><span class="v">渔民世家 · 2016年 · 自有品牌</span></div>
             <div class="ap-row"><span class="k">黄金渔场</span><span class="v">北纬23° 福建东山岛</span></div>
             <div class="ap-row"><span class="k">自有设施</span><span class="v">200+㎡ 冻库 · 400+㎡ 精深加工厂</span></div>
             <div class="ap-row"><span class="k">经营模式</span><span class="v">公司 + 小船 + 渔户</span></div>
@@ -268,6 +380,11 @@
           <h2>品牌实力</h2>
         </div>
         <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-num" style="font-size:26px; letter-spacing:1px; font-family:Georgia,&quot;Times New Roman&quot;,&quot;STSong&quot;,serif;">渔民世家</div>
+            <div class="stat-label">与海为伴 · 以船为家</div>
+            <div class="stat-desc">知潮汐 · 识鱼汛 · 善渔获</div>
+          </div>
           <div class="stat-item">
             <div class="stat-num">2016<small>年</small></div>
             <div class="stat-label">创立自有品牌</div>
@@ -361,6 +478,136 @@
       </div>
     </section>
 
+    <!-- 05 产品中心精选（首页：左侧目录 + 右侧8图，预览版） -->
+    <section class="section">
+      <div class="container">
+        <div class="pp-layout">
+          <!-- 左侧折叠目录 -->
+          <aside class="pp-sidebar">
+            <div class="pp-sb-head">
+              <h3>产品中心</h3>
+              <span>PRODUCT CENTER</span>
+            </div>
+            <nav class="pp-cat-list" id="ppCatList"><!-- 由 products.js 动态生成 --></nav>
+            <script src="assets/js/products.js?v=20260906b"></script>
+            <script>
+              (function () {
+                var nav = document.getElementById('ppCatList');
+                if (!nav) return;
+                var data = window.PRODUCTS || [];
+                data.forEach(function (cat) {
+                  var items = (cat.items || []).filter(function (p) { return !p.hidden; });
+                  if (!items.length) return;
+                  var key = cat.cat;
+                  var ci = document.createElement('div');
+                  ci.className = 'pp-cat-item';
+                  ci.setAttribute('data-cat', key);
+                  ci.innerHTML = '<span>' + cat.cat + '</span><span class="pp-cat-arrow">▼</span>';
+                  nav.appendChild(ci);
+                  var sub = document.createElement('div');
+                  sub.className = 'pp-sub-list';
+                  sub.id = 'sub-' + key;
+                  items.forEach(function (p) {
+                    var a = document.createElement('a');
+                    a.className = 'pp-sub-link';
+                    a.href = 'business.html#' + p.id;
+                    a.textContent = p.name;
+                    sub.appendChild(a);
+                  });
+                  nav.appendChild(sub);
+                  ci.addEventListener('click', function () {
+                    var open = ci.classList.toggle('open');
+                    sub.classList.toggle('show', open);
+                  });
+                });
+              })();
+            </script>
+          </aside>
+
+          <!-- 右侧8张产品图（默认展开） -->
+          <div class="pp-main">
+            <div class="pp-grid">
+              <a class="pp-card" href="business.html#sea-1">
+                <img src="assets/products/海鲜系列/野生大黄鱼/01.jpg" alt="野生大黄鱼" loading="lazy">
+                <span class="pp-name">野生大黄鱼</span>
+              </a>
+              <a class="pp-card" href="business.html#sea-24">
+                <img src="assets/products/海鲜系列/大管/01.jpg" alt="大管" loading="lazy">
+                <span class="pp-name">大管</span>
+              </a>
+              <a class="pp-card" href="business.html#dry-2">
+                <img src="assets/products/渔家干货/鱿鱼干/01.jpg" alt="鱿鱼干" loading="lazy">
+                <span class="pp-name">鱿鱼干</span>
+              </a>
+              <a class="pp-card" href="business.html#prod-4">
+                <img src="assets/products/海产制品/五香卷/01.jpg" alt="五香卷" loading="lazy">
+                <span class="pp-name">五香卷</span>
+              </a>
+              <a class="pp-card" href="business.html#gift-1">
+                <img src="assets/products/礼盒套装/海鲜组合礼盒/01.jpg" alt="海鲜组合礼盒" loading="lazy">
+                <span class="pp-name">海鲜组合礼盒</span>
+              </a>
+              <a class="pp-card" href="business.html#gift-2">
+                <img src="assets/products/礼盒套装/节日定制礼盒/01.jpg" alt="节日定制礼盒" loading="lazy">
+                <span class="pp-name">节日定制礼盒</span>
+              </a>
+              <a class="pp-card" href="business.html#dry-4">
+                <img src="assets/products/渔家干货/干贝瑶柱/01.jpg" alt="干贝瑶柱" loading="lazy">
+                <span class="pp-name">干贝瑶柱</span>
+              </a>
+              <a class="pp-card" href="business.html#dry-7">
+                <img src="assets/products/渔家干货/头水紫菜/01.jpg" alt="头水紫菜" loading="lazy">
+                <span class="pp-name">头水紫菜</span>
+              </a>
+            </div>
+            <div class="pp-more"><a href="business.html">查看全部产品 ›</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 新闻中心（首页） -->
+    <section class="section news-home">
+      <div class="container">
+        <div class="news-head">
+          <div class="news-head-left">
+            <div class="sub">NEWS CENTER</div>
+            <h2>新闻中心</h2>
+          </div>
+          <a href="news.html" class="news-more">了解更多 →</a>
+        </div>
+        <div class="news-grid" id="homeNewsGrid"><!-- 由 news-index.json 动态生成 --></div>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        var grid = document.getElementById('homeNewsGrid');
+        if (!grid) return;
+        function esc(v) {
+          return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+        fetch('assets/news/news-index.json?_=' + Date.now())
+          .then(function (r) { return r.json(); })
+          .then(function (list) {
+            if (!list || !list.length) { grid.innerHTML = '<div class="news-empty">暂无新闻</div>'; return; }
+            list.sort(function (a, b) { return Number(b.id) - Number(a.id); });
+            grid.innerHTML = list.map(function (n) {
+              return '<a class="news-card" href="news.html#' + esc(n.id) + '">'
+                + '<h3 class="news-card-title">' + esc(n.title) + '</h3>'
+                + '<span class="news-card-dash"></span>'
+                + '<p class="news-card-summary">' + esc(n.summary || '') + '</p>'
+                + '<span class="news-card-more">了解更多 →</span>'
+                + '</a>';
+            }).join('');
+          })
+          .catch(function () {
+            grid.innerHTML = '<div class="news-empty">新闻加载失败，请通过 http 服务访问</div>';
+          });
+      })();
+    </script>
+
     <!-- CTA -->
     <section class="section cta-band">
       <div class="container" style="text-align:center;color:#fff;">
@@ -374,6 +621,6 @@
   </main>
   <footer class="site-footer" id="site-footer"></footer>
 </div>
-<script src="assets/js/site.js?v=20260905g"></script>
+<script src="assets/js/site.js?v=20260906b"></script>
 </body>
 </html>

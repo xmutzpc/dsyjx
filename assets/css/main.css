@@ -359,6 +359,25 @@ h1, h2, h3, h4, h5 { margin: 0; font-weight: 700; color: var(--c-text); }
 .about-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
 .about-intro .prose h2 { font-size: 26px; color: var(--c-primary); margin-bottom: 18px; }
 .about-intro .prose p { color: var(--c-text-2); margin-bottom: 14px; text-align: justify; }
+.about-intro .about-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.about-intro .about-qr img {
+  width: 220px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+.about-intro .about-qr p {
+  color: var(--c-text-2);
+  font-size: 14px;
+  text-align: center;
+  line-height: 1.6;
+}
 
 /* ---------- 关于我们：企业文化 ---------- */
 .culture-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
@@ -546,7 +565,7 @@ h1, h2, h3, h4, h5 { margin: 0; font-weight: 700; color: var(--c-text); }
 /* ---------- 联系我们 ---------- */
 .contact-info-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   margin-bottom: 50px;
 }
@@ -556,6 +575,9 @@ h1, h2, h3, h4, h5 { margin: 0; font-weight: 700; color: var(--c-text); }
   padding: 28px 24px;
   text-align: left;
   transition: all .2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .contact-info-card:hover { box-shadow: var(--shadow-sm); }
 .contact-info-card h4 {
@@ -564,6 +586,36 @@ h1, h2, h3, h4, h5 { margin: 0; font-weight: 700; color: var(--c-text); }
   margin-bottom: 10px;
 }
 .contact-info-card p { color: var(--c-text-2); margin: 0; font-size: 14px; }
+
+/* 邮箱/电话卡 · 图标呼应 */
+.ci-icon { border-top: 3px solid var(--c-gold); }
+.ci-top { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.ci-badge {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--c-primary);
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 auto;
+}
+.ci-head { display: flex; flex-direction: column; }
+.ci-title { font-size: 16px; font-weight: 600; color: var(--c-primary); line-height: 1.3; }
+.ci-sub { font-size: 12px; color: var(--c-text-3); letter-spacing: .5px; }
+.ci-main {
+  font-size: 20px; font-weight: 600; color: var(--c-text);
+  line-height: 1.35; margin-bottom: 10px;
+}
+.ci-main.ci-mail { font-size: 17px; white-space: nowrap; }
+.ci-main.ci-addr { font-size: 13px; font-weight: 400; color: var(--c-text-2); line-height: 1.6; }
+.ci-desc { font-size: 13px; color: var(--c-text-2); margin: 0; }
+
+/* 品牌创始人微信卡 */
+.contact-wechat { text-align: center; }
+.contact-wechat .wechat-qr {
+  width: 138px; max-width: 100%; height: auto;
+  border-radius: 8px; display: block; margin: 0 auto;
+  border: 1px solid var(--c-line);
+  box-shadow: 0 4px 14px rgba(11, 58, 94, .08);
+}
+.contact-wechat .wechat-tip { margin-top: 12px; color: var(--c-text-3); font-size: 13px; }
 
 .contact-form-wrap {
   background: var(--c-bg-2);

@@ -11,6 +11,7 @@
     seoDesc: '东山岛渔船直供、电商和餐饮供货海鲜批发和零售、小船现钓、活冻锁鲜',
     navLeft: [
       { t: '首页', u: 'index.html' },
+      { t: '关于我们', u: 'about.html' },
       { t: '产品中心', u: 'business.html', children: [
         ['海鲜系列', 'business.html'],
         ['渔家干货', 'business.html'],
@@ -82,7 +83,7 @@
     var el = document.getElementById('site-footer');
     el.innerHTML =
       '<div class="container footer-top">' +
-      '<div class="fcol"><h5>' + SITE.company + '</h5>' +
+      '<div class="fcol"><h5>' + SITE.short + '</h5>' +
       '<p style="margin:0;color:#999;max-width:320px;line-height:1.8;">' + SITE.seoDesc + '</p></div>' +
       groups +
       '<div class="fcol"><h5>联系我们</h5><ul class="footer-contact">' +
@@ -238,6 +239,7 @@
       var cName = safe(cat.cat);
       var itemsHtml = '';
       (cat.items || []).forEach(function (p) {
+        if (p.hidden) return;
         var fName = p.folder || safe(p.name);
         var folder = 'assets/products/' + cName + '/' + fName;
         itemsHtml += '<a href="#' + esc(p.id) + '" data-id="' + esc(p.id) + '">' + esc(p.name) + '</a>';
@@ -334,6 +336,7 @@
 
   /* 产品详情图：淘宝式纵向平铺，顺序读取 data-folder 内 01/02/03... 图片 */
   function initProductGallery() {
+    var CACHE_BUST = '?cb=' + Date.now();
     var galleries = document.querySelectorAll('.gallery');
     if (!galleries.length) return;
 
@@ -383,7 +386,7 @@
       function tryExt(num, ei) {
         if (done) return;
         if (num > MAX || ei >= exts.length) { finish(); return; }
-        var url = folder + '/' + ('0' + num).slice(-2) + '.' + exts[ei];
+        var url = folder + '/' + ('0' + num).slice(-2) + '.' + exts[ei] + CACHE_BUST;
         var im = new Image();
         im.onload = function () {
           if (done) return;
